@@ -1,0 +1,7 @@
+# Image generation only. No model, Torch, or Wand required.
+# Mirrors the dependencies used by the pinned official corruption processors.
+numpy>=2.2,<2.3
+Pillow>=10.1
+opencv-python-headless>=4.10,<5
+scipy>=1.14,<2
+scikit-image>=0.24,<0.26

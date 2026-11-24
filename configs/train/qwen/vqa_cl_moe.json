@@ -1,0 +1,44 @@
+{
+  "config_version": 2,
+  "model": {
+    "architecture": "qwen",
+    "model_path": "Valen-Team/Valen-2B",
+    "finetuning_type": "cl_moe",
+    "qwen_execution": "shared_state",
+    "dtype": "bf16",
+    "attn_implementation": "sdpa",
+    "cl_moe": {
+      "experts": 8,
+      "top_k": 2,
+      "max_tasks": 10,
+      "beta": 0.5,
+      "gamma": 0.7,
+      "calibration_limit": 0
+    }
+  },
+  "data": {"path": "data/vqa-cl-decision/recognition/train.jsonl", "max_length": 8192},
+  "training": {
+    "method": "sft",
+    "stage": "joint",
+    "output": "output/vqa-cl-moe/00_recognition",
+    "device": "cuda",
+    "seed": 42,
+    "epochs": 1,
+    "global_batch_size": 64,
+    "tokens_per_step": 262144,
+    "microbatch_size": 32,
+    "microbatch_max_tokens": 32768,
+    "data_prefetch": true,
+    "gradient_checkpointing": true,
+    "head_lr": 0.0002,
+    "lora_rank": 64,
+    "lora_alpha": 128,
+    "lora_lr": 0.0002,
+    "merger_lr": 0.00002,
+    "weight_decay": 0.0,
+    "lr_scheduler": "cosine",
+    "warmup_ratio": 0.03,
+    "save_every": 50
+  },
+  "objective": {"brier_weight": 0.0, "rps_weight": 0.0}
+}

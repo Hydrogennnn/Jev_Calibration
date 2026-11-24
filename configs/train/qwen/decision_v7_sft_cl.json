@@ -1,0 +1,37 @@
+{
+  "config_version": 2,
+  "model": {
+    "architecture": "qwen",
+    "model_path": "Valen-Team/Valen-2B",
+    "finetuning_type": "lora",
+    "qwen_execution": "shared_state",
+    "dtype": "bf16",
+    "attn_implementation": "sdpa"
+  },
+  "data": {
+    "path": "data/decision-v7-cl/agnews/train.jsonl",
+    "max_length": 8192
+  },
+  "training": {
+    "method": "sft",
+    "stage": "text",
+    "output": "output/decision-v7-cl-moe/00_agnews",
+    "device": "cuda",
+    "seed": 42,
+    "epochs": 1,
+    "tokens_per_step": 16384,
+    "global_batch_size": 16,
+    "microbatch_size": 1,
+    "microbatch_max_tokens": 16384,
+    "gradient_checkpointing": true,
+    "head_lr": 0.00001,
+    "lora_rank": 32,
+    "lora_alpha": 64,
+    "lora_lr": 0.00001,
+    "save_every": 100
+  },
+  "objective": {
+    "brier_weight": 0.1,
+    "rps_weight": 0.2
+  }
+}

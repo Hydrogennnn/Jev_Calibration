@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "valen"
+version = "0.1.0"
+description = "Valen: multimodal decisions with Qwen3.5 or dual encoders, SFT and experimental RLCD"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.10"
+dependencies = ["torch==2.6.0", "torchvision==0.21.0", "transformers==5.4.0", "peft==0.18.1", "huggingface-hub==1.7.1", "httpx[socks]>=0.28,<1", "numpy>=1.26", "Pillow>=10", "av==16.1.0", "psutil>=5.9,<8"]
+
+[project.optional-dependencies]
+test = ["pytest==8.4.2"]
+caption-data = ["boto3>=1.34,<2"]
+experiments = ["boto3>=1.34,<2", "matplotlib>=3.8,<4"]
+model-formats = ["onnx==1.19.1", "onnxruntime==1.23.2", "gguf==0.19.0"]
+decision-index = ["decision-index @ git+https://github.com/apolinario/decision-index.git@f5a6e4fd85fed05e77878dfc4966d0568bfb45ec"]
+
+[project.urls]
+Repository = "https://github.com/Valen-Team/Valen"
+Issues = "https://github.com/Valen-Team/Valen/issues"
+
+[tool.setuptools.packages.find]
+include = ["valen*", "evaluation*"]
+
+[tool.setuptools.package-data]
+"evaluation.jevbench._upstream" = ["LICENSE"]
+"evaluation.decision_index" = ["README.md", "README_zh.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

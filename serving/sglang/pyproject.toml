@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "valen-sglang"
+version = "0.1.0.dev3"
+description = "Native Valen decision plugin for SGLang"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["sglang", "pillow", "requests"]
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{name = "Valen-Team"}]
+
+[project.entry-points."sglang.srt.plugins"]
+valen = "valen_sglang.plugin:register"
+
+[project.scripts]
+valen-sglang = "valen_sglang.launch_server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
